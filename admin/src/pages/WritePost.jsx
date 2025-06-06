@@ -115,6 +115,7 @@ const WritePost = () => {
 
                   // Preview
                   const previewURL = URL.createObjectURL(selectedFile);
+                  setFilePreviewURL(previewURL);
                   
                   uploadFile(setFileUploadURL, selectedFile);                }
               }}
