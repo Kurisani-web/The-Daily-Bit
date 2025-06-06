@@ -38,6 +38,7 @@ const WritePost = () => {
   const [title, setTitle] = useState(null);
   const [fileURL, setFileURL] = useState(null);
   const [fileUploadURL, setFileUploadURL] = useState(null);
+  const [filePreviewURL, setFilePreviewURL] = useState(null); // For preview
 
   const theme = colorScheme === "dark";
 
@@ -112,6 +113,9 @@ const WritePost = () => {
                   toast.success("Image picked successfully ✅️");
 
 
+                  // Preview
+                  const previewURL = URL.createObjectURL(selectedFile);
+                  
                   uploadFile(setFileUploadURL, selectedFile);                }
               }}
               className='hidden'
@@ -122,6 +126,16 @@ const WritePost = () => {
             <BiImages />
             <span>Post Image</span>
           </label>
+          {filePreviewURL && (
+  <div className="mt-4">
+    <h4 className="text-sm font-medium mb-2">Image Preview:</h4>
+    <img
+      src={filePreviewURL}
+      alt="Preview"
+      className="w-full max-w-md h-auto rounded-lg shadow-md"
+    />
+  </div>
+)}
         </div>
 
         {editor && (
