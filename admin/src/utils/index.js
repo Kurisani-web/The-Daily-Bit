@@ -10,10 +10,8 @@ export const API_URI = "https://the-daily-bit.onrender.com";
 
 export const uploadFile = (setFileURL, file) => {
   const storage = getStorage(app);
-
   const name = new Date().getTime() + file.name;
   const storageRef = ref(storage, name);
-
   const uploadTask = uploadBytesResumable(storageRef, file);
 
   uploadTask.on(
@@ -21,24 +19,21 @@ export const uploadFile = (setFileURL, file) => {
     (snapshot) => {
       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       console.log("Upload is " + progress + "% done");
-
-      switch (snapshot.state) {
-        case "paused":
-          console.log("Upload is paused");
-          break;
-        case "running":
-          console.log("Upload is running");
-          break;
-      }
     },
     (error) => {
-      console.log(error);
+      console.error("❌ Upload failed:", error);
+      setFileURL(null); // <-- ✅ Let component know it failed
     },
     () => {
-      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-        console.log("Successfully uploaded");
-        setFileURL(downloadURL);
-      });
+      getDownloadURL(uploadTask.snapshot.ref)
+        .then((downloadURL) => {
+          console.log("✅ Successfully uploaded");
+          setFileURL(downloadURL); // <-- ✅ Let component know it succeeded
+        })
+        .catch((err) => {
+          console.error("❌ Failed to get download URL:", err);
+          setFileURL(null); // <-- ✅ Handle this failure too
+        });
     }
   );
 };
