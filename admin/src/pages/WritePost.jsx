@@ -124,30 +124,42 @@ const WritePost = () => {
             htmlFor='imgUpload'
           >
             <input
-              type='file'
-              onChange={(e) => {
-                const selectedFile = e.target.files[0];
-                if (selectedFile) {
-                  console.log("Image selected:", selectedFile);
-                  toast.success("Image picked successfully ✅️");
+            <input
+  type="file"
+  onChange={(e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      if (selectedFile.size > 5 * 1024 * 1024) {
+        toast.error("Image must be less than 5MB");
+        return;
+      }
 
+      toast.success("Image picked successfully ✅️");
 
-                  // Preview
-                  const previewURL = URL.createObjectURL(selectedFile);
-                  setFilePreviewURL(previewURL);
+      const previewURL = URL.createObjectURL(selectedFile);
+      setFilePreviewURL(previewURL);
 
-                  setFileUploading(true);
-                  
-                  uploadFile((url) => {
-                    setFileUploadURL(url);
-                    setFileUploading(false);
-                  }, selectedFile);                }
-              }}
-              className='hidden'
-              id='imgUpload'
-              data-max-size='5120'
-              accept='.jpg, .png, .jpeg'
-            />
+      setFileUploading(true);
+
+      uploadFile(
+        (url) => {
+          if (url) {
+            setFileUploadURL(url);
+            setFileUploading(false);
+          } else {
+            toast.error("Image upload failed ❌");
+            setFileUploading(false);
+          }
+        },
+        selectedFile
+      );
+    }
+  }}
+  className="hidden"
+  id="imgUpload"
+  data-max-size="5120"
+  accept=".jpg, .png, .jpeg"
+/>
             <BiImages />
             <span>Post Image</span>
           </label>
