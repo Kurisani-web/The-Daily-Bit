@@ -59,6 +59,7 @@ const WritePost = () => {
   });
 
   const handleSubmit = async () => {
+    console.log("📸 fileUploadURL is:", fileUploadURL); // DEBUG HERE
     const description = editor?.getHTML()?.trim();
     
     if (!title.trim()) {
