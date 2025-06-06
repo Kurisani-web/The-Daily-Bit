@@ -151,6 +151,11 @@ const WritePost = () => {
             <BiImages />
             <span>Post Image</span>
           </label>
+          {fileUploading && (
+  <div className="mt-2 text-sm text-gray-500 animate-pulse">
+    Uploading image...
+  </div>
+)}
           {filePreviewURL && (
   <div className="mt-4">
     <h4 className="text-sm font-medium mb-2">Image Preview:</h4>
