@@ -1,12 +1,13 @@
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
-  authDomain: "fullstack-blog-app-b0ac2.firebaseapp.com",
-  projectId: "fullstack-blog-app-b0ac2",
-  storageBucket: "fullstack-blog-app-b0ac2.appspot.com",
-  messagingSenderId: "1038252361509",
-  appId: "1:1038252361509:web:eb8b16ce44e3dbd3407ccc",
+  apiKey: "AIzaSyD_uWtNcuHKU90JJfDWn2X-miyFeHI-JNs",
+  authDomain: "daily-bit-ab659.firebaseapp.com",
+  projectId: "daily-bit-ab659",
+  storageBucket: "daily-bit-ab659.firebasestorage.app",
+  messagingSenderId: "873009986090",
+  appId: "1:873009986090:web:a01c541ac9c1a035d3e153",
+  measurementId: "G-B4Y4BJRBW2"
 };
 
 export const app = initializeApp(firebaseConfig);
