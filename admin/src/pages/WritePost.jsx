@@ -123,7 +123,7 @@ const WritePost = () => {
             className='flex items-center gap-1 text-base   cursor-pointer'
             htmlFor='imgUpload'
           >
-            <input
+            
             <input
   type="file"
   onChange={(e) => {
