@@ -94,10 +94,6 @@ const WritePost = () => {
     });
   };
 
-  useEffect(() => {
-    file && uploadFile(setFileURL, file);
-  }, [file]);
-
   return (
     <>
       <RichTextEditor editor={editor}>
