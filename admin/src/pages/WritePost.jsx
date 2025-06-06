@@ -59,8 +59,8 @@ const WritePost = () => {
   });
 
   const handleSubmit = async () => {
-    if (!fileUploadURL || !category || !title) {
-      toast.error("All fileds are required");
+    if (!fileUploadURL || !category || !title.trim()) {
+      toast.error("All fields are required");
       return;
     }
 
