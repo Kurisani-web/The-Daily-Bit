@@ -37,6 +37,7 @@ const WritePost = () => {
   const [file, setFile] = useState("");
   const [title, setTitle] = useState("");
   const [fileURL, setFileURL] = useState(null);
+  const [fileUploading, setFileUploading] = useState(false);
   const [fileUploadURL, setFileUploadURL] = useState(null);
   const [filePreviewURL, setFilePreviewURL] = useState(null); // For preview
 
@@ -134,8 +135,13 @@ const WritePost = () => {
                   // Preview
                   const previewURL = URL.createObjectURL(selectedFile);
                   setFilePreviewURL(previewURL);
+
+                  setFileUploading(true);
                   
-                  uploadFile(setFileUploadURL, selectedFile);                }
+                  uploadFile((url) => {
+                    setFileUploadURL(url);
+                    setFileUploading(false);
+                  }, selectedFile);                }
               }}
               className='hidden'
               id='imgUpload'
