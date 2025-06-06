@@ -59,8 +59,25 @@ const WritePost = () => {
   });
 
   const handleSubmit = async () => {
-    if (!fileUploadURL || !category || !title.trim()) {
-      toast.error("All fields are required");
+    const description = editor?.getHTML()?.trim();
+    
+    if (!title.trim()) {
+      toast.error("Post title is required");
+      return;
+    }
+
+    if (!category) {
+      toast.error("Post category is required");
+      return;
+    }
+
+    if (!fileUploadURL) {
+      toast.error("Post image is required");
+      return;
+    }
+
+    if (!description || description === "<p></p>") {
+      toast.error("Post description is required");
       return;
     }
 
@@ -71,7 +88,7 @@ const WritePost = () => {
       slug,
       cat: category,
       img: fileUploadURL,
-      desc: editor.getHTML(),
+      desc: description,
     });
   };
 
