@@ -4,6 +4,7 @@ import { sendVerificationEmail } from "../utils/sendEmail.js";
 
 export const register = async (req, res, next) => {
   try {
+    console.log("📥 Register request body:", req.body);
     const {
       firstName,
       lastName,
@@ -97,6 +98,7 @@ export const googleSignUp = async (req, res, next) => {
 
 export const login = async (req, res, next) => {
   try {
+    console.log("📥 Login request body:", req.body);
     const { email, password } = req.body;
 
     //validation
