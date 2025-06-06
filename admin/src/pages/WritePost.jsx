@@ -37,6 +37,7 @@ const WritePost = () => {
   const [file, setFile] = useState("");
   const [title, setTitle] = useState(null);
   const [fileURL, setFileURL] = useState(null);
+  const [fileUploadURL, setFileUploadURL] = useState(null);
 
   const theme = colorScheme === "dark";
 
@@ -57,7 +58,7 @@ const WritePost = () => {
   });
 
   const handleSubmit = async () => {
-    if (!fileURL || !category || !title) {
+    if (!fileUploadURL || !category || !title) {
       toast.error("All fileds are required");
       return;
     }
@@ -68,7 +69,7 @@ const WritePost = () => {
       title,
       slug,
       cat: category,
-      img: fileURL,
+      img: fileUploadURL,
       desc: editor.getHTML(),
     });
   };
@@ -109,8 +110,9 @@ const WritePost = () => {
                 if (selectedFile) {
                   console.log("Image selected:", selectedFile);
                   toast.success("Image picked successfully ✅️");
-                  setFile(selectedFile);
-                }
+
+
+                  uploadFile(setFileUploadURL, selectedFile);                }
               }}
               className='hidden'
               id='imgUpload'
