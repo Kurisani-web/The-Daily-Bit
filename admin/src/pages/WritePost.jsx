@@ -133,7 +133,7 @@ const WritePost = () => {
     <img
       src={filePreviewURL}
       alt="Preview"
-      className="w-full max-w-md h-auto rounded-lg shadow-md"
+      className="w-full max-w-md h-auto rounded-lg shadow-md object-contain"
     />
   </div>
 )}
