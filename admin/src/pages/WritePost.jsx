@@ -88,13 +88,13 @@ const WritePost = () => {
             label='Post title'
             className='w-full flex-1'
             placeholder='Post title'
-            defaultValue={title}
+            value={title || ""}
             onChange={(e) => setTitle(e.target.value)}
           />
 
           <Select
             label='Category'
-            defaultValue={"NEWS"}
+            value={category}
             placeholder='Pick Category'
             data={["NEWS", "SPORTS", "CODING", "EDUCATION", "FASHION"]}
             onChange={(val) => setCategory(val)}
@@ -226,10 +226,11 @@ const WritePost = () => {
 
       <div className='w-full flex items-end justify-end mt-6'>
         <Button
+          disabled={isPending}
           className={theme ? "bg-blue-600" : "bg-black"}
           onClick={() => handleSubmit()}
         >
-          Submit Post
+          {isPending ? "Submitting..." : "Submit Post"}
         </Button>
       </div>
 
