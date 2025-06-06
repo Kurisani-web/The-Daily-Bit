@@ -27,6 +27,11 @@ app.use(morgan("dev"));
 
 app.use(routes);
 
+// I added this
+app.get('/', (req, res) => {
+  res.send('🚀 Daily Bit API is live');
+});
+
 app.use(errorMiddleware);
 
 app.listen(PORT, () => {
