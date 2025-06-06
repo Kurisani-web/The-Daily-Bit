@@ -20,8 +20,8 @@ export const register = async (req, res, next) => {
       return next("Provide Required Fields!");
     }
 
-    if (accountType === "Writer" && !image)
-      return next("Please provide profile picture");
+    //if (accountType === "Writer" && !image)
+      //return next("Please provide profile picture");
 
     const userExist = await Users.findOne({ email });
 
@@ -35,7 +35,7 @@ export const register = async (req, res, next) => {
       name: firstName + " " + lastName,
       email,
       password: !provider ? hashedPassword : "",
-      image,
+      image: image || "https://images.app.goo.gl/cLmRkB7LKbHmng2N8",
       accountType,
       provider,
     });
