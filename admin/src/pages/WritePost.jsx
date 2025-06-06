@@ -243,7 +243,7 @@ const WritePost = () => {
 
       <div className='w-full flex items-end justify-end mt-6'>
         <Button
-          disabled={isPending || !fileUploadURL}
+          disabled={isPending}
           className={theme ? "bg-blue-600" : "bg-black"}
           onClick={() => handleSubmit()}
         >
