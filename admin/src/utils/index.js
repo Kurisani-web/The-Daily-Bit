@@ -8,7 +8,7 @@ import { app } from "./firebase";
 
 export const API_URI = "https://the-daily-bit.onrender.com";
 
-export const uploadFile = (setFileURL, file) => {
+export const uploadFile = async (onComplete, file) => {
   const storage = getStorage(app);
   const name = new Date().getTime() + file.name;
   const storageRef = ref(storage, name);
@@ -22,18 +22,17 @@ export const uploadFile = (setFileURL, file) => {
     },
     (error) => {
       console.error("❌ Upload failed:", error);
-      setFileURL(null); // <-- ✅ Let component know it failed
+      onComplete(null); // ⛔️ This must be called to stop loading
     },
-    () => {
-      getDownloadURL(uploadTask.snapshot.ref)
-        .then((downloadURL) => {
-          console.log("✅ Successfully uploaded");
-          setFileURL(downloadURL); // <-- ✅ Let component know it succeeded
-        })
-        .catch((err) => {
-          console.error("❌ Failed to get download URL:", err);
-          setFileURL(null); // <-- ✅ Handle this failure too
-        });
+    async () => {
+      try {
+        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+        console.log("✅ Successfully uploaded");
+        onComplete(downloadURL);
+      } catch (err) {
+        console.error("❌ Failed to get download URL:", err);
+        onComplete(null);
+      }
     }
   );
 };
