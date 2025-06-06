@@ -104,7 +104,14 @@ const WritePost = () => {
           >
             <input
               type='file'
-              onChange={(e) => setFile(e.target.files[0])}
+              onChange={(e) => {
+                const selectedFile = e.target.files[0];
+                if (selectedFile) {
+                  console.log("Image selected:", selectedFile);
+                  toast.success("Image picked successfully ✅️");
+                  setFile(selectedFile);
+                }
+              }}
               className='hidden'
               id='imgUpload'
               data-max-size='5120'
