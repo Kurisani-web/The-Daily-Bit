@@ -35,7 +35,7 @@ const WritePost = () => {
 
   const [category, setCategory] = useState("NEWS");
   const [file, setFile] = useState("");
-  const [title, setTitle] = useState(null);
+  const [title, setTitle] = useState("");
   const [fileURL, setFileURL] = useState(null);
   const [fileUploadURL, setFileUploadURL] = useState(null);
   const [filePreviewURL, setFilePreviewURL] = useState(null); // For preview
@@ -226,7 +226,7 @@ const WritePost = () => {
 
       <div className='w-full flex items-end justify-end mt-6'>
         <Button
-          disabled={isPending}
+          disabled={isPending || !fileUploadURL}
           className={theme ? "bg-blue-600" : "bg-black"}
           onClick={() => handleSubmit()}
         >
